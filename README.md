@@ -1,3 +1,7 @@
+## BRANCH INFO
+This branch clears the query buffer when an outgoing message is written,
+instead of when a client connects. It will also put messages into the
+buffer even when a client is connected.
 
 #[![ZNC](http://wiki.znc.in/skins/common/images/wiki.png)](http://znc.in) - An advanced IRC bouncer
 
