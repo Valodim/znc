@@ -826,10 +826,8 @@ bool CIRCSock::OnGeneralCTCP(CNick& Nick, CString& sMessage) {
 bool CIRCSock::OnPrivNotice(CNick& Nick, CString& sMessage) {
 	IRCSOCKMODULECALL(OnPrivNotice(Nick, sMessage), return true);
 
-	if (!m_pNetwork->IsUserOnline()) {
-		// If the user is detached, add to the buffer
-		m_pNetwork->AddQueryBuffer(":" + _NAMEDFMT(Nick.GetNickMask()) + " NOTICE {target} :{text}", sMessage);
-	}
+	// Always add to the buffer
+	m_pNetwork->AddQueryBuffer(":" + _NAMEDFMT(Nick.GetNickMask()) + " NOTICE {target} :{text}", sMessage);
 
 	return false;
 }
@@ -837,10 +835,8 @@ bool CIRCSock::OnPrivNotice(CNick& Nick, CString& sMessage) {
 bool CIRCSock::OnPrivMsg(CNick& Nick, CString& sMessage) {
 	IRCSOCKMODULECALL(OnPrivMsg(Nick, sMessage), return true);
 
-	if (!m_pNetwork->IsUserOnline()) {
-		// If the user is detached, add to the buffer
-		m_pNetwork->AddQueryBuffer(":" + _NAMEDFMT(Nick.GetNickMask()) + " PRIVMSG {target} :{text}", sMessage);
-	}
+	// Always add to the buffer
+	m_pNetwork->AddQueryBuffer(":" + _NAMEDFMT(Nick.GetNickMask()) + " PRIVMSG {target} :{text}", sMessage);
 
 	return false;
 }

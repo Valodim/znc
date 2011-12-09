@@ -438,7 +438,8 @@ void CIRCNetwork::ClientConnected(CClient *pClient) {
 		NETWORKMODULECALL(OnPrivBufferPlayLine(*pClient, sLine), m_pUser, this, NULL, continue);
 		pClient->PutClient(sLine);
 	}
-	m_QueryBuffer.Clear();
+	// Do not clear this here - it gets cleared when any privmsg or notice is written!
+	// m_QueryBuffer.Clear();
 
 	// Tell them why they won't connect
 	if (!m_pUser->GetIRCConnectEnabled())

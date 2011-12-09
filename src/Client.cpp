@@ -205,6 +205,11 @@ void CClient::ReadLine(const CString& sData) {
 		}
 		return;  // If the server understands it, we already enabled namesx / uhnames
 	} else if (sCommand.Equals("NOTICE")) {
+		// Anything goes through here - clear the query buffer!
+		if(m_pNetwork) {
+			m_pNetwork->ClearQueryBuffer();
+		}
+
 		CString sTarget = sLine.Token(1);
 		CString sMsg = sLine.Token(2, true).TrimPrefix_n();
 
@@ -259,6 +264,11 @@ void CClient::ReadLine(const CString& sData) {
 			return;
 		}
 	} else if (sCommand.Equals("PRIVMSG")) {
+		// Anything goes through here - clear the query buffer!
+		if(m_pNetwork) {
+			m_pNetwork->ClearQueryBuffer();
+		}
+
 		CString sTarget = sLine.Token(1);
 		CString sMsg = sLine.Token(2, true).TrimPrefix_n();
 
